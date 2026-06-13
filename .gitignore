@@ -1,0 +1,41 @@
+# Virtual Environment
+
+.venv/
+venv/
+env/
+
+# Environment Variables
+
+.env
+
+# Python
+
+**pycache**/
+*.pyc
+*.pyo
+*.pyd
+
+# Flask Instance Folder
+
+instance/
+
+# Migrations Cache
+
+migrations/**pycache**/
+
+# VS Code
+
+.vscode/
+
+# OS Files
+
+.DS_Store
+Thumbs.db
+
+# Testing
+
+.pytest_cache/
+
+# Logs
+
+*.log
