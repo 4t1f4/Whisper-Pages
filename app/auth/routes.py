@@ -21,5 +21,6 @@ def signup():
   print(email)
   print(password)
   print(confirm_password)
+  # this will be printed in terminal
 
   return "Form Submitted Successfully"
