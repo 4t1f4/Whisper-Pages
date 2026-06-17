@@ -7,6 +7,9 @@ from flask import request, render_template, redirect, url_for
 def test():
   return "Auth Blueprint Working"
 
+
+
+
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
   if request.method == 'GET':
@@ -24,3 +27,16 @@ def signup():
   # this will be printed in terminal
 
   return "Form Submitted Successfully"
+
+@auth_bp.route("/login", methods=["GET", "POST"])
+def login():
+  if request.method == 'GET':
+    return render_template("auth/login.html")
+  
+  username = request.form.get("username")
+  password = request.form.get("password")
+
+  print(username)
+  print(password)
+
+  return "Login Form Submitted"
