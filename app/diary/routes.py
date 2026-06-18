@@ -34,3 +34,17 @@ def new_entry():
     return redirect(
         url_for("diary.dashboard")
     )
+
+
+@diary_bp.route("/history")
+@login_required
+def history():
+
+    entries = Entry.query.filter_by(
+        user_id=current_user.id
+    ).all()
+
+    return render_template(
+        "diary/history.html",
+        entries=entries
+    )
