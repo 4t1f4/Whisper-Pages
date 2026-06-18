@@ -65,3 +65,18 @@ def entry_detail(id):
         entry=entry
     )
 
+
+
+@diary_bp.route("/<int:id>/delete", methods=["POST"])
+@login_required
+def delete_entry(id):
+
+    entry = Entry.query.get_or_404(id)
+
+    if entry.user_id != current_user.id:
+        return "Access Denied"
+
+    db.session.delete(entry)
+    db.session.commit()
+
+    return redirect(url_for("diary.history"))
