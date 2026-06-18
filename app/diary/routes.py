@@ -48,3 +48,20 @@ def history():
         "diary/history.html",
         entries=entries
     )
+
+
+
+@diary_bp.route("/<int:id>")
+@login_required
+def entry_detail(id):
+
+    entry = Entry.query.get_or_404(id)
+
+    if entry.user_id != current_user.id:
+        return "Access Denied"
+
+    return render_template(
+        "diary/entry_detail.html",
+        entry=entry
+    )
+
