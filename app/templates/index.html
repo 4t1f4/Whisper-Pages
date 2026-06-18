@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Secret Diary{% endblock %}
+
+{% block content %}
+
+<h1>📖 Secret Diary</h1>
+
+<p>Welcome to Secret Diary!</p>
+
+<hr>
+
+<h3>Authentication</h3>
+
+<ul>
+    <li>
+        <a href="{{ url_for('auth.signup') }}">
+            Sign Up
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('auth.login') }}">
+            Login
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('auth.logout') }}">
+            Logout
+        </a>
+    </li>
+</ul>
+
+<hr>
+
+<h3>Diary</h3>
+
+<ul>
+    <li>
+        <a href="{{ url_for('diary.dashboard') }}">
+            Dashboard
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('diary.new_entry') }}">
+            Create Entry
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ url_for('diary.history') }}">
+            Entry History
+        </a>
+    </li>
+</ul>
+
+<hr>
+
+<h3>Profile</h3>
+
+<ul>
+    <li>
+        <a href="{{ url_for('profile.profile') }}">
+            My Profile
+        </a>
+    </li>
+</ul>
+
+{% endblock %}
