@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Edit Entry{% endblock %}
+
+{% block content %}
+
+<h1>Edit Entry</h1>
+
+<form method="POST">
+
+    <input
+        type="text"
+        name="title"
+        value="{{ entry.title }}"
+        required
+    >
+
+    <br><br>
+
+    <textarea
+        name="content"
+        rows="10"
+        cols="50"
+        required
+    >{{ entry.content }}</textarea>
+
+    <br><br>
+
+    <button type="submit">
+        Update Entry
+    </button>
+
+</form>
+
+{% endblock %}
