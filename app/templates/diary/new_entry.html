@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}New Entry{% endblock %}
+
+{% block content %}
+
+<h1>New Diary Entry</h1>
+
+<form method="POST">
+
+    <input
+        type="text"
+        name="title"
+        placeholder="Title"
+        required
+    >
+    <br><br>
+
+    <textarea
+        name="content"
+        placeholder="Write your diary..."
+        rows="10"
+        cols="50"
+        required
+    ></textarea>
+    <br><br>
+
+    <button type="submit">
+        Save Entry
+    </button>
+
+</form>
+
+{% endblock %}
