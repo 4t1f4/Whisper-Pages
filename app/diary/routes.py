@@ -80,3 +80,11 @@ def delete_entry(id):
     db.session.commit()
 
     return redirect(url_for("diary.history"))
+
+
+@diary_bp.route("/dashboard")
+@login_required
+def dashboard():
+    return render_template(
+        "diary/dashboard.html"
+    )

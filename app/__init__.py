@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -40,5 +40,10 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(diary_bp)
     app.register_blueprint(profile_bp)
+
+
+    @app.route("/")
+    def index():
+        return render_template("index.html")
 
     return app
