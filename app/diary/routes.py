@@ -88,3 +88,21 @@ def dashboard():
     return render_template(
         "diary/dashboard.html"
     )
+
+
+@diary_bp.route("/<int:id>/edit", methods=["GET", "POST"])
+@login_required
+def edit_entry(id):
+    entry = Entry.query.get_or_404(id)
+
+    if entry.user_id != current_user.id:
+        return "Access Denied"
+
+    if request.method == "POST":
+        entry.title = request.form.get("title")
+        entry.content = request.form.get("content")
+        db.session.commit()
+        return redirect(url_for("diary.entry_detail", id=entry.id))
+
+    # Reuses your beautiful entry form layout style, just pre-filled!
+    return render_template("diary/new_entry.html", entry=entry)
