@@ -1,23 +1,116 @@
 {% extends "base.html" %}
-{% block title %}Entry Detail{% endblock %}
+{% block title %}{{ entry.title }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .entry-detail-container {
+        padding: 10px 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .entry-meta {
+        font-size: 0.9rem;
+        color: var(--text-body);
+        opacity: 0.7;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Cozy physical notebook sheet effect with exact left-alignment */
+    .entry-body {
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 24px;
+        padding: 35px;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: var(--text-body);
+        margin: 25px 0;
+        
+        /* Layout & Spacing Engine fixes */
+        white-space: pre-wrap;   /* Keeps your paragraph splits intact */
+        text-align: left;         /* Forces the sentences perfectly flush left */
+        display: block;           /* Standard block formatting context */
+        width: 100%;              /* Uses the full width of the wrapper card */
+        box-sizing: border-box;   /* Stops padding from blowing out the borders */
+    }
+
+    /* Bottom Action Controls row */
+    .detail-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+    }
+
+    .action-left {
+        display: flex;
+        gap: 12px;
+    }
+
+    /* Safe, subtle warning aesthetic for delete operations */
+    .btn-delete {
+        background: transparent;
+        color: #e63946;
+        border: 1px solid rgba(230, 57, 70, 0.3);
+        box-shadow: none;
+    }
+
+    .btn-delete:hover {
+        background: #e63946;
+        color: white;
+        box-shadow: 0 8px 20px rgba(230, 57, 70, 0.25);
+    }
+
+    @media (max-width: 600px) {
+        .detail-actions, .action-left {
+            flex-direction: column;
+            width: 100%;
+        }
+        .detail-actions .btn, .action-left .btn, .detail-actions form {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
 
 {% block content %}
+<div class="entry-detail-container">
+    
+    <h1 style="font-size: 2.5rem; margin-bottom: 8px; text-align: left;">{{ entry.title }}</h1>
+    
+    <div class="entry-meta">
+        <span>📅 Written on</span>
+        <strong>{{ entry.created_at.strftime('%d-%b-%Y at %I:%M %p') }}</strong>
+    </div>
 
-<h1>{{ entry.title }}</h1>
+    <hr>
 
-<p>{{ entry.content }}</p>
+    <div class="entry-body">{{ entry.content }}</div>
 
-<p>{{ entry.created_at }}</p>
+    <hr>
 
-<form
-    action="{{ url_for('diary.delete_entry', id=entry.id) }}"
-    method="POST"
->
+    <div class="detail-actions">
+        <div class="action-left">
+            <a href="{{ url_for('diary.history') }}" class="btn btn-secondary">
+                ← Back to History
+            </a>
+            <a href="{{ url_for('diary.edit_entry', id=entry.id) }}" class="btn">
+                ✍️ Edit Page
+            </a>
+        </div>
 
-    <button type="submit">
-        Delete Entry
-    </button>
+        <form action="{{ url_for('diary.delete_entry', id=entry.id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this memory forever?');">
+            <button type="submit" class="btn btn-delete">
+                Delete Entry
+            </button>
+        </form>
+    </div>
 
-</form>
-
+</div>
 {% endblock %}
