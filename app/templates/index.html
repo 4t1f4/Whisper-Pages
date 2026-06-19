@@ -1,70 +1,37 @@
 {% extends "base.html" %}
-{% block title %}Secret Diary{% endblock %}
+
+{% block title %}
+Whisper Pages
+{% endblock %}
 
 {% block content %}
 
-<h1>📖 Secret Diary</h1>
+<div style="text-align:center; padding:60px 20px;">
 
-<p>Welcome to Secret Diary!</p>
+    <h1 style="font-size:5rem;">
+        Whisper Pages
+    </h1>
 
-<hr>
+    <p style="font-size:1.2rem; font-style:italic;">
+        "A gentle place for your thoughts to rest."
+    </p>
 
-<h3>Authentication</h3>
+    <br>
 
-<ul>
-    <li>
-        <a href="{{ url_for('auth.signup') }}">
-            Sign Up
-        </a>
-    </li>
+    <a
+        href="{{ url_for('auth.login') }}"
+        class="btn"
+    >
+        Login
+    </a>
 
-    <li>
-        <a href="{{ url_for('auth.login') }}">
-            Login
-        </a>
-    </li>
+    <a
+        href="{{ url_for('auth.signup') }}"
+        class="btn"
+    >
+        Sign Up
+    </a>
 
-    <li>
-        <a href="{{ url_for('auth.logout') }}">
-            Logout
-        </a>
-    </li>
-</ul>
-
-<hr>
-
-<h3>Diary</h3>
-
-<ul>
-    <li>
-        <a href="{{ url_for('diary.dashboard') }}">
-            Dashboard
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('diary.new_entry') }}">
-            Create Entry
-        </a>
-    </li>
-
-    <li>
-        <a href="{{ url_for('diary.history') }}">
-            Entry History
-        </a>
-    </li>
-</ul>
-
-<hr>
-
-<h3>Profile</h3>
-
-<ul>
-    <li>
-        <a href="{{ url_for('profile.profile') }}">
-            My Profile
-        </a>
-    </li>
-</ul>
+</div>
 
 {% endblock %}
