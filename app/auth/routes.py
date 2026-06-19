@@ -82,7 +82,7 @@ def login():
     ):
         login_user(user)
 
-        return "Successfully Logged In"
+        return redirect(url_for("profile.profile"))
 
     return "Invalid Username or Password"
 
@@ -91,4 +91,4 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for("auth.login"))
+    return redirect(url_for("index"))
