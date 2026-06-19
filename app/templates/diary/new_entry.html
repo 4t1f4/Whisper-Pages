@@ -1,33 +1,81 @@
 {% extends "base.html" %}
 {% block title %}New Entry{% endblock %}
 
-{% block content %}
+{% block extra_css %}
+<style>
+    .entry-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-<h1>New Diary Entry</h1>
+    /* Notebook journal styling for writing content */
+    .journal-textarea {
+        background: rgba(255, 255, 255, 0.7);
+        line-height: 1.8 !important;
+        font-size: 1rem;
+        padding: 20px 24px !important;
+        border-radius: 20px !important;
+        min-height: 280px;
+    }
+
+    /* Form actions control layout */
+    .entry-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-top: 30px;
+    }
+
+    @media (max-width: 500px) {
+        .entry-actions {
+            flex-direction: column-reverse;
+            width: 100%;
+        }
+        .entry-actions .btn {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="entry-header">
+    <h1>New Diary Entry</h1>
+    <p>Pour your thoughts onto the paper without holding back.</p>
+</div>
 
 <form method="POST">
 
+    <label for="title">Entry Title</label>
     <input
         type="text"
+        id="title"
         name="title"
-        placeholder="Title"
+        placeholder="Give this moment a title..."
         required
     >
-    <br><br>
 
+    <label for="content">Your Thoughts</label>
     <textarea
+        id="content"
         name="content"
-        placeholder="Write your diary..."
-        rows="10"
-        cols="50"
+        class="journal-textarea"
+        placeholder="Dear Diary, today was..."
         required
     ></textarea>
-    <br><br>
 
-    <button type="submit">
-        Save Entry
-    </button>
+    <hr>
+
+    <div class="entry-actions">
+        <a href="{{ url_for('diary.dashboard') }}" class="btn btn-secondary">
+            Cancel
+        </a>
+
+        <button type="submit">
+            Save Entry
+        </button>
+    </div>
 
 </form>
-
 {% endblock %}
