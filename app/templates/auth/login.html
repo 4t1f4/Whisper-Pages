@@ -1,30 +1,66 @@
 {% extends "base.html" %}
 {% block title %}Login{% endblock %}
 
-{% block content %}
+{% block extra_css %}
+<style>
+    .form-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .form-footer {
+        margin-top: 25px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--text-body);
+        opacity: 0.9;
+    }
 
-<h1>Login</h1>
+    /* Centers the submit button cleanly */
+    .form-actions {
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-header">
+    <h1>Login</h1>
+    <p>Welcome back to your quiet space.</p>
+</div>
 
 <form action="{{ url_for('auth.login') }}" method="POST">
 
+    <label for="username">Username</label>
     <input
         type="text"
+        id="username"
         name="username"
-        placeholder="Username"
+        placeholder="Enter your username"
         required
     >
-    <br><br>
 
+    <label for="password">Password</label>
     <input
         type="password"
+        id="password"
         name="password"
-        placeholder="Password"
+        placeholder="Enter your password"
         required
     >
-    <br><br>
 
-    <button type="submit">Login</button>
+    <div class="form-actions">
+        <button type="submit">Login</button>
+    </div>
 
 </form>
+
+<hr>
+
+<div class="form-footer">
+    New to Whisper Pages? <a href="{{ url_for('auth.signup') }}">Create an account</a>
+</div>
 
 {% endblock %}
