@@ -1,33 +1,109 @@
 {% extends "base.html" %}
 {% block title %}Profile{% endblock %}
 
+{% block extra_css %}
+<style>
+    .profile-card {
+        padding: 10px 0;
+    }
+
+    /* Beautifully structured profile details */
+    .profile-info {
+        margin: 25px 0;
+        background: rgba(255, 255, 255, 0.35);
+        padding: 24px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .info-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px dashed rgba(109, 89, 122, 0.1);
+    }
+
+    .info-group:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .info-label {
+        font-weight: 500;
+        color: var(--text-main);
+        font-size: 0.95rem;
+    }
+
+    .info-value {
+        font-weight: 300;
+        color: var(--text-body);
+    }
+
+    /* Action button grouping */
+    .profile-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-top: 30px;
+    }
+
+    /* Specific customized aesthetic styling for logout action button */
+    .btn-logout {
+        background: #f4acb7; /* Warm, cozy pastel rose-red */
+        box-shadow: 0 8px 20px rgba(244, 172, 183, 0.3);
+    }
+
+    .btn-logout:hover {
+        background: #ffb5a7;
+        box-shadow: 0 12px 25px rgba(244, 172, 183, 0.5);
+    }
+
+    @media (max-width: 500px) {
+        .profile-actions {
+            flex-direction: column;
+            width: 100%;
+        }
+        .profile-actions .btn {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
+<div class="profile-card">
+    <h1>My Profile</h1>
+    <p>Your quiet corner on Whisper Pages.</p>
 
-<h1>My Profile</h1>
+    <div class="profile-info">
+        <div class="info-group">
+            <span class="info-label">Username</span>
+            <span class="info-value">@{{ current_user.username }}</span>
+        </div>
+        
+        <div class="info-group">
+            <span class="info-label">Email Address</span>
+            <span class="info-value">{{ current_user.email }}</span>
+        </div>
+        
+        <div class="info-group">
+            <span class="info-label">Member Since</span>
+            <span class="info-value">{{ current_user.created_at.strftime('%d-%b-%Y') }}</span>
+        </div>
+    </div>
 
-<hr>
+    <hr>
 
-<p>
-    <strong>Username:</strong>
-    {{ current_user.username }}
-</p>
+    <div class="profile-actions">
+        <a href="{{ url_for('diary.dashboard') }}" class="btn btn-secondary">
+            Go to Dashboard
+        </a>
 
-<p>
-    <strong>Email:</strong>
-    {{ current_user.email }}
-</p>
-
-<p>
-    <strong>Joined:</strong>
-    {{ current_user.created_at }}
-</p>
-
-<hr>
-
-<p>
-    <a href="{{ url_for('auth.logout') }}">
-        Logout
-    </a>
-</p>
-
+        <a href="{{ url_for('auth.logout') }}" class="btn btn-logout">
+            Logout
+        </a>
+    </div>
+</div>
 {% endblock %}
