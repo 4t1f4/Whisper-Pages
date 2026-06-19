@@ -1,34 +1,83 @@
 {% extends "base.html" %}
 {% block title %}Edit Entry{% endblock %}
 
-{% block content %}
+{% block extra_css %}
+<style>
+    .entry-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-<h1>Edit Entry</h1>
+    /* Notebook journal styling for editing content */
+    .journal-textarea {
+        background: rgba(255, 255, 255, 0.7);
+        line-height: 1.8 !important;
+        font-size: 1rem;
+        padding: 20px 24px !important;
+        border-radius: 20px !important;
+        min-height: 280px;
+        text-align: left;
+    }
+
+    /* Form actions control layout */
+    .entry-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-top: 30px;
+    }
+
+    @media (max-width: 500px) {
+        .entry-actions {
+            flex-direction: column-reverse;
+            width: 100%;
+        }
+        .entry-actions .btn {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="entry-header">
+    <h1>Edit Entry</h1>
+    <p>Refine your thoughts and polish this chapter of your story.</p>
+</div>
 
 <form method="POST">
 
+    <label for="title">Update Title</label>
     <input
         type="text"
+        id="title"
         name="title"
         value="{{ entry.title }}"
+        placeholder="Give this moment a title..."
         required
     >
 
-    <br><br>
-
+    <label for="content">Edit Your Thoughts</label>
     <textarea
+        id="content"
         name="content"
-        rows="10"
-        cols="50"
+        class="journal-textarea"
+        placeholder="Dear Diary, today was..."
         required
     >{{ entry.content }}</textarea>
 
-    <br><br>
+    <hr>
 
-    <button type="submit">
-        Update Entry
-    </button>
+    <div class="entry-actions">
+        <a href="{{ url_for('diary.entry_detail', id=entry.id) }}" class="btn btn-secondary">
+            Cancel
+        </a>
+
+        <button type="submit">
+            Update Entry
+        </button>
+    </div>
 
 </form>
-
 {% endblock %}
