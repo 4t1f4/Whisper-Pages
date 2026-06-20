@@ -83,7 +83,7 @@ The project was built while learning Flask, backend development, authentication 
 ## 📂 Project Structure
 
 ```text
-Secret-Diary/
+Whisper-Pages/
 │
 ├── run.py
 ├── requirements.txt
@@ -100,16 +100,20 @@ Secret-Diary/
 │   ├── extensions.py
 │   │
 │   ├── models/
+│   │   ├── __init__.py
 │   │   ├── user.py
 │   │   └── entry.py
 │   │
 │   ├── auth/
+│   │   ├── __init__.py
 │   │   └── routes.py
 │   │
 │   ├── diary/
+│   │   ├── __init__.py
 │   │   └── routes.py
 │   │
 │   ├── profile/
+│   │   ├── __init__.py
 │   │   └── routes.py
 │   │
 │   ├── templates/
@@ -134,8 +138,8 @@ Secret-Diary/
 Clone the repository:
 
 ```bash
-git clone https://github.com/noturs06/Secret-Diary.git
-cd Secret-Diary
+git clone https://github.com/noturs06/Whisper-Pages.git
+cd Whisper-Pages
 ```
 
 Create a virtual environment:
