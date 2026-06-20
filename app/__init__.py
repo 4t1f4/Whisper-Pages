@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
+from flask_login import current_user
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -45,6 +46,10 @@ def create_app():
     @app.route("/")
     @app.route("/index")
     def index():
+        
+        if current_user.is_authenticated:
+            return redirect(url_for("diary.dashboard"))
+        
         return render_template("index.html")
 
     return app
