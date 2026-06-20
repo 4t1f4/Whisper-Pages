@@ -26,6 +26,13 @@ def test():
 @auth_bp.route("/signup", methods=["GET", "POST"])
 def signup():
 
+    if current_user.is_authenticated:
+        return redirect(url_for("diary.dashboard"))
+
+    if request.method == "GET":
+        return render_template("auth/signup.html")
+    
+
     if request.method == "GET":
         return render_template("auth/signup.html")
 
@@ -63,8 +70,18 @@ def signup():
     return redirect(url_for("auth.login"))
 
 
+
+
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
+
+    if current_user.is_authenticated:
+        return redirect(url_for("diary.dashboard"))
+
+    if request.method == "GET":
+        return render_template("auth/login.html")
+
+
 
     if request.method == "GET":
         return render_template("auth/login.html")
