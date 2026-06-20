@@ -4,7 +4,8 @@ from flask import (
     request,
     render_template,
     redirect,
-    url_for
+    url_for,
+    flash
 )
 
 from app.models import User
@@ -17,21 +18,18 @@ from flask_login import (
     current_user
 )
 
-
+#only for test
 @auth_bp.route("/test")
 def test():
     return "Auth Blueprint Working"
 
-
+#sign up page logic
 @auth_bp.route("/signup", methods=["GET", "POST"])
 def signup():
 
     if current_user.is_authenticated:
-        return redirect(url_for("diary.dashboard"))
+        return redirect(url_for("profile.profile"))
 
-    if request.method == "GET":
-        return render_template("auth/signup.html")
-    
 
     if request.method == "GET":
         return render_template("auth/signup.html")
@@ -42,17 +40,21 @@ def signup():
     confirm_password = request.form.get("confirm_password")
 
     if password != confirm_password:
-        return "Passwords do not match"
-
+        flash("Passwords do not match", "error")
+        return redirect(url_for("auth.signup"))
+    
     existing_user = User.query.filter_by(username=username).first()
 
     if existing_user:
-        return "Username already exists"
+        flash("Username already exists", "error")
+        return redirect(url_for("auth.signup"))
+
 
     existing_email = User.query.filter_by(email=email).first()
 
     if existing_email:
-        return "Email already registered"
+        flash("Email already registered", "error")
+        return redirect(url_for("auth.signup"))
 
     hashed_password = bcrypt.generate_password_hash(
         password
@@ -67,20 +69,17 @@ def signup():
     db.session.add(user)
     db.session.commit()
 
+    flash("Account created successfully. Please log in.", "success")
     return redirect(url_for("auth.login"))
 
 
 
-
+#login page logic
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
 
     if current_user.is_authenticated:
-        return redirect(url_for("diary.dashboard"))
-
-    if request.method == "GET":
-        return render_template("auth/login.html")
-
+        return redirect(url_for("profile.profile"))
 
 
     if request.method == "GET":
@@ -101,7 +100,8 @@ def login():
 
         return redirect(url_for("profile.profile"))
 
-    return "Invalid Username or Password"
+    flash("Invalid username or password", "error")
+    return redirect(url_for("auth.login"))
 
 
 @auth_bp.route("/logout")

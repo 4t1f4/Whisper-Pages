@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import current_user
 from dotenv import load_dotenv
 
@@ -48,7 +48,8 @@ def create_app():
     def index():
         
         if current_user.is_authenticated:
-            return redirect(url_for("diary.dashboard"))
+            flash("Please log out to go to homepage.")
+            return redirect(url_for("profile.profile"))
         
         return render_template("index.html")
 
