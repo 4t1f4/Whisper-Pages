@@ -2,6 +2,8 @@
 
 A soft, elegant, and secure digital diary built with Flask.
 
+🌐 **Live Demo:** https://whisper-pages.onrender.com
+
 Whisper Pages is a personal journaling application where users can create an account, write private diary entries, revisit memories, edit existing entries, and manage their profile through a calm and aesthetically pleasing interface.
 
 The project was built while learning Flask, backend development, authentication systems, databases, and application structure.
@@ -37,7 +39,7 @@ The project was built while learning Flask, backend development, authentication 
 
 ### Database
 
-* MySQL Database Integration
+* PostgreSQL (Neon)
 * SQLAlchemy ORM
 * Database Migrations with Flask-Migrate and Alembic
 
@@ -62,7 +64,7 @@ The project was built while learning Flask, backend development, authentication 
 * Flask-Migrate
 * Flask-Login
 * Flask-Bcrypt
-* MySQL
+* PostgreSQL
 * Alembic
 
 ### Frontend
@@ -72,11 +74,13 @@ The project was built while learning Flask, backend development, authentication 
 * JavaScript
 * Jinja2 Templates
 
-### Tools
+### Deployment & Tools
 
 * Git
 * GitHub
 * VS Code
+* Render
+* Neon PostgreSQL
 
 ---
 
@@ -166,7 +170,7 @@ Configure environment variables:
 
 ```env
 SECRET_KEY=your_secret_key
-DATABASE_URL=mysql+pymysql://username:password@localhost/database_name
+DATABASE_URL=your_database_url
 ```
 
 Run database migrations:
@@ -198,11 +202,13 @@ This project helped explore:
 * Authentication & Authorization
 * SQLAlchemy ORM
 * Database Relationships
-* Migrations
+* Database Migrations
 * Session Management
 * Jinja Templates
 * Project Organization
 * Git & GitHub Workflow
+* PostgreSQL Integration
+* Cloud Deployment with Render
 
 ---
 
