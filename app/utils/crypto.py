@@ -11,3 +11,8 @@ def encrypt_text(text):
 
 def decrypt_text(text):
   return cipher.decrypt(text.encode()).decode()
+
+
+# encode() = str -> bytes
+# decode() = bytes -> str
+# Fernet encrypt/decrypt works only with bytes
