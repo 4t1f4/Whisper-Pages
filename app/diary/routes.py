@@ -1,5 +1,9 @@
 from app.diary import diary_bp
 from flask import render_template, request, redirect, url_for
+from app.utils import (
+  encrypt_text,
+  decrypt_text
+)
 
 from flask_login import (
     login_required,
@@ -20,7 +24,9 @@ def new_entry():
         )
 
     title = request.form.get("title")
-    content = request.form.get("content")
+    content = encrypt_text(
+        request.form.get("content")
+    )
 
     entry = Entry(
         title=title,
@@ -44,6 +50,9 @@ def history():
         user_id=current_user.id
     ).all()
 
+    for entry in entries:
+        entry.decrypted_content = decrypt_text(entry.content)
+
     return render_template(
         "diary/history.html",
         entries=entries
@@ -59,6 +68,8 @@ def entry_detail(id):
 
     if entry.user_id != current_user.id:
         return "Access Denied"
+    
+    entry.decrypted_content = decrypt_text(entry.content)
 
     return render_template(
         "diary/entry_detail.html",
@@ -100,9 +111,13 @@ def edit_entry(id):
 
     if request.method == "POST":
         entry.title = request.form.get("title")
-        entry.content = request.form.get("content")
+        entry.content = encrypt_text(
+            request.form.get("content")
+        )
         db.session.commit()
         return redirect(url_for("diary.entry_detail", id=entry.id))
 
     # Reuses your beautiful entry form layout style, just pre-filled!
+
+    entry.content = decrypt_text(entry.content)
     return render_template("diary/new_entry.html", entry=entry)
