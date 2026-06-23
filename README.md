@@ -6,7 +6,7 @@ A soft, elegant, and secure digital diary built with Flask.
 
 Whisper Pages is a personal journaling application where users can create an account, write private diary entries, revisit memories, edit existing entries, and manage their profile through a calm and aesthetically pleasing interface.
 
-The project was built while learning Flask, backend development, authentication systems, databases, and application structure.
+The project was built while learning Flask, backend development, authentication systems, databases, application structure, deployment, and data security.
 
 ---
 
@@ -30,6 +30,14 @@ The project was built while learning Flask, backend development, authentication 
 * Delete Entries
 * Entry History Page
 * Personal Dashboard
+
+### Security
+
+* Password Hashing with Bcrypt
+* Diary Entry Encryption using Fernet
+* Environment Variable Based Secret Management
+* Protected User Routes
+* User Data Isolation
 
 ### User Profile
 
@@ -64,6 +72,7 @@ The project was built while learning Flask, backend development, authentication 
 * Flask-Migrate
 * Flask-Login
 * Flask-Bcrypt
+* Cryptography (Fernet Encryption)
 * PostgreSQL
 * Alembic
 
@@ -102,6 +111,10 @@ Whisper-Pages/
 │   ├── __init__.py
 │   ├── config.py
 │   ├── extensions.py
+│   │
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   └── crypto.py
 │   │
 │   ├── models/
 │   │   ├── __init__.py
@@ -142,7 +155,7 @@ Whisper-Pages/
 Clone the repository:
 
 ```bash
-git clone https://github.com/noturs06/Whisper-Pages.git
+git clone https://github.com/4t1f4/Whisper-Pages.git
 cd Whisper-Pages
 ```
 
@@ -160,6 +173,12 @@ Windows:
 venv\Scripts\activate
 ```
 
+Linux / macOS:
+
+```bash
+source venv/bin/activate
+```
+
 Install dependencies:
 
 ```bash
@@ -171,6 +190,7 @@ Configure environment variables:
 ```env
 SECRET_KEY=your_secret_key
 DATABASE_URL=your_database_url
+ENCRYPTION_KEY=your_fernet_key
 ```
 
 Run database migrations:
@@ -193,6 +213,47 @@ http://127.0.0.1:5000
 
 ---
 
+## 🔒 Security
+
+Whisper Pages uses multiple layers of security:
+
+### Password Protection
+
+User passwords are hashed using Flask-Bcrypt before being stored in the database.
+
+### Diary Encryption
+
+All diary entries are encrypted using Fernet encryption before being stored in PostgreSQL.
+
+This means:
+
+* Database administrators cannot read diary contents directly.
+* Raw database records contain encrypted text instead of readable entries.
+* Entries are automatically decrypted only when viewed by the authenticated owner.
+
+### Environment Variables
+
+Sensitive information such as:
+
+* SECRET_KEY
+* DATABASE_URL
+* ENCRYPTION_KEY
+
+is stored using environment variables instead of hardcoded values.
+
+---
+
+## ☁️ Deployment
+
+Whisper Pages is deployed using:
+
+* Render (Web Hosting)
+* Neon PostgreSQL (Database)
+
+The application automatically deploys from GitHub whenever changes are pushed to the main branch.
+
+---
+
 ## 📖 Learning Objectives
 
 This project helped explore:
@@ -209,6 +270,8 @@ This project helped explore:
 * Git & GitHub Workflow
 * PostgreSQL Integration
 * Cloud Deployment with Render
+* Environment Variables
+* Data Encryption with Fernet
 
 ---
 
@@ -225,6 +288,8 @@ This project helped explore:
 * Email Verification
 * REST API
 * Automated Tests
+* Docker Support
+* User Profile Pictures
 
 ---
 
@@ -232,4 +297,6 @@ This project helped explore:
 
 Whisper Pages was created as a learning project while exploring Flask and backend development.
 
-The goal was not only to build a functional diary application, but also to create a peaceful writing experience through thoughtful design and user-friendly interactions.
+The goal was not only to build a functional diary application, but also to create a peaceful writing experience through thoughtful design, secure data handling, and user-friendly interactions.
+
+Building this project provided hands-on experience with authentication systems, database design, deployment workflows, cloud databases, and encryption techniques used in real-world web applications.
