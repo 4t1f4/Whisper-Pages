@@ -116,7 +116,7 @@
                 <span class="entry-title">{{ entry.title }}</span>
                 <span class="entry-date">{{ entry.created_at.strftime('%d-%b-%Y') }}</span>
             </div>
-            <p class="entry-preview">{{ entry.content }}</p>
+            <p class="entry-preview">{{ entry.decrypted_content }}</p>
             <span class="read-more-hint">Read full entry →</span>
         </a>
     {% else %}
