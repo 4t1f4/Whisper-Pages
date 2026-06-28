@@ -22,7 +22,38 @@
         display: flex;
         justify-content: center;
     }
+
+    .password-container{
+        position: relative;
+        width: 100%;
+    }
+
+    .password-container input{
+        width: 100%;
+        padding-right: 45px; /* Space for the eye icon */
+    }
+
+    .password-container button{
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+
+        background: transparent;
+        border: none;
+        cursor: pointer;
+
+        color: var(--text-body);
+        font-size: 1rem;
+        padding: 0;
+    }
+
+    .password-container button:hover{
+        color: var(--text-main);
+    }
+
 </style>
+
 {% endblock %}
 
 {% block content %}
@@ -44,13 +75,19 @@
     >
 
     <label for="password">Password</label>
-    <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Enter your password"
-        required
-    >
+    <div class="password-container">
+       <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+        > 
+        <button type="button" id="togglePassword">
+            <i class="fa-solid fa-eye"></i>
+        </button>
+    </div>
+    
 
     <div class="form-actions">
         <button type="submit">Login</button>
@@ -63,5 +100,26 @@
 <div class="form-footer">
     New to Whisper Pages? <a href="{{ url_for('auth.signup') }}">Create an account</a>
 </div>
+
+<script>
+    const password = document.getElementById("password");
+    const toggle = document.getElementById("togglePassword");
+
+    toggle.addEventListener("click", () => {
+
+        if (password.type === "password") {
+
+            password.type = "text";
+            toggle.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+
+        } else {
+
+            password.type = "password";
+            toggle.innerHTML = '<i class="fa-solid fa-eye"></i>';
+
+        }
+
+    });
+</script>
 
 {% endblock %}

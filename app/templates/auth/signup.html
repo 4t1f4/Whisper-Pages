@@ -22,6 +22,38 @@
         display: flex;
         justify-content: center;
     }
+
+
+
+    .password-container{
+        position: relative;
+        width: 100%;
+    }
+
+    .password-container input{
+        width: 100%;
+        padding-right: 45px; /* Space for the eye icon */
+    }
+
+    .password-container button{
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+
+        background: transparent;
+        border: none;
+        cursor: pointer;
+
+        color: var(--text-body);
+        font-size: 1rem;
+        padding: 0;
+    }
+
+    .password-container button:hover{
+        color: var(--text-main);
+    }
+
 </style>
 {% endblock %}
 
@@ -53,22 +85,32 @@
     >
 
     <label for="password">Password</label>
-    <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Create a strong password"
-        required
-    >
+    <div class="password-container">
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Create a strong password"
+            required
+        >
+        <button type="button" id="togglePassword">
+            <i class="fa-solid fa-eye"></i>
+        </button>
+    </div>
 
     <label for="confirm_password">Confirm Password</label>
-    <input
-        type="password"
-        id="confirm_password"
-        name="confirm_password"
-        placeholder="Repeat your password"
-        required
-    >
+    <div class="password-container">
+        <input
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            placeholder="Repeat your password"
+            required
+        >
+        <button type="button" id="toggleConfirmPassword">
+            <i class="fa-solid fa-eye"></i>
+        </button>
+    </div>
 
     <div class="form-actions">
         <button type="submit">Sign Up</button>
@@ -81,5 +123,33 @@
 <div class="form-footer">
     Already have an account? <a href="{{ url_for('auth.login') }}">Log in here</a>
 </div>
+
+<script>
+    function setupPasswordToggle(inputId, buttonId) {
+
+        const password = document.getElementById(inputId);
+        const toggle = document.getElementById(buttonId);
+
+        toggle.addEventListener("click", () => {
+
+            if (password.type === "password") {
+
+                password.type = "text";
+                toggle.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+
+            } else {
+
+                password.type = "password";
+                toggle.innerHTML = '<i class="fa-solid fa-eye"></i>';
+
+            }
+
+        });
+
+    }
+
+    setupPasswordToggle("password", "togglePassword");
+    setupPasswordToggle("confirm_password", "toggleConfirmPassword");
+</script>
 
 {% endblock %}
