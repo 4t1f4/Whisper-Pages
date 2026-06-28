@@ -35,7 +35,8 @@
 
     <label for="username">Username</label>
     <input
-        type="text"
+        type="text" 
+        oninput="this.value = this.value.toLowerCase();"
         id="username"
         name="username"
         placeholder="Choose a unique username"
