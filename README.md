@@ -18,6 +18,7 @@ The project was built while learning Flask, backend development, authentication 
 * User Login
 * User Logout
 * Password Hashing with Flask-Bcrypt
+* Password Visibility Toggle (Show/Hide Password)
 * Session Management with Flask-Login
 * Protected Routes
 * Authentication Feedback using Flash Messages
@@ -58,6 +59,7 @@ The project was built while learning Flask, backend development, authentication 
 * Responsive Layout
 * Animated Ambient Background
 * Interactive Visual Effects
+* Password Visibility Toggle
 * Custom Typography
 
 ---
@@ -72,7 +74,7 @@ The project was built while learning Flask, backend development, authentication 
 * Flask-Migrate
 * Flask-Login
 * Flask-Bcrypt
-* Cryptography (Fernet Encryption)
+* Cryptography (Fernet)
 * PostgreSQL
 * Alembic
 
@@ -82,6 +84,7 @@ The project was built while learning Flask, backend development, authentication 
 * CSS
 * JavaScript
 * Jinja2 Templates
+* Font Awesome Icons
 
 ### Deployment & Tools
 
@@ -272,6 +275,7 @@ This project helped explore:
 * Cloud Deployment with Render
 * Environment Variables
 * Data Encryption with Fernet
+* Client-side JavaScript Interactions
 
 ---
 
